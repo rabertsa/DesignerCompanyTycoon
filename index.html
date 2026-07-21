@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0c2340">
+<title>Kule Ofis — Çizim Stüdyosu Tycoon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="stars" id="starsField"></div>
+
+<!-- DİL SEÇİM EKRANI: sadece cihaz dili TR/EN olarak net algılanamazsa görünür -->
+<div id="languageScreen" style="display:none;">
+  <div class="lang-card">
+    <div class="lang-title" id="langSelectLabel">Select Your Language:</div>
+    <div class="lang-flags">
+      <button class="lang-flag-btn" id="langTrBtn">
+        <span class="flag-circle">🇹🇷</span>
+        <span class="flag-label">Türkçe</span>
+      </button>
+      <button class="lang-flag-btn" id="langEnBtn">
+        <span class="flag-circle">🇺🇸</span>
+        <span class="flag-label">English</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+  <div class="start-card">
+    <div class="emoji">🏢</div>
+    <h1 id="startTitleText">Stüdyonu Kur</h1>
+    <p id="startDescText">Kat kat bir çizim ajansı inşa edeceksin. Çizerlerini işe al, yıldızlarını yükselt, yeni katlar satın al!</p>
+    <input id="nameInput" maxlength="24" placeholder="Şirket adı yaz..." autocomplete="off">
+    <button id="startBtn" disabled>Kuruluşu Başlat</button>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div id="topbar" style="display:none;">
+  <div id="companyName">—<span>Çizim Stüdyosu</span></div>
+  <div class="topbar-right">
+    <button id="wheelBtn" class="icon-btn" title="Günlük Çark">🎡</button>
+    <button id="marketBtn" class="icon-btn" title="Market">🛒</button>
+    <div id="moneyBox" title="Market'i aç">💰 <span id="moneyVal">0</span> ₺</div>
+    <button id="rebirthBtn" class="icon-btn" title="Rebirth">👑</button>
+  </div>
+</div>
+
+<!-- BUILDING -->
+<div id="building"></div>
+
+<!-- REKLAM BONUSU: dairesel geri sayım rozeti (sadece aktifken görünür) -->
+<div id="adBuffWidget" class="ad-buff-widget" style="display:none;">
+  <svg viewBox="0 0 100 100" class="ring-svg">
+    <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
+    <circle class="ring-fg" id="ringFg" cx="50" cy="50" r="42"></circle>
+  </svg>
+  <div class="ring-center">
+    <div class="ring-label">x2 <span class="arrow">›</span></div>
+    <div class="ring-timer" id="ringTimer">15:00</div>
+  </div>
+</div>
+
+<!-- GENEL POPUP (işe alma / yükseltme / çark / market / rebirth) -->
+<div id="popupOverlay">
+  <div class="popup-card" id="popupCard"></div>
+</div>
+
+<!-- SEKRETER: sadece konuşacağı an görünür -->
+<div id="secretaryWrap">
+  <img id="secretaryImg" src="sekreter.png" alt="Sekreter">
+  <div id="bubble">
+    <div class="txt" id="bubbleText"></div>
+    <div class="skip" id="bubbleSkip">Atla ▶</div>
+  </div>
+</div>
+
+<script src="language.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
