@@ -322,4 +322,4 @@ button,.slot,.buy-btn,.skip,.popup-close{
 @media (max-width:380px){
   .slots{grid-template-columns:repeat(3,1fr);gap:7px;}
   .avatar{font-size:24px;}
-}
+  }
