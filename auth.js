@@ -28,11 +28,14 @@ function authScreenMarkup() {
       <input id="authEmailInput" type="email" placeholder="ornek@eposta.com" autocomplete="email">
       <button id="authSendBtn">Kod Gönder</button>
       <div id="authCodeWrap" style="display:none;margin-top:12px;">
-        <input id="authCodeInput" maxlength="6" placeholder="6 haneli kod" inputmode="numeric" style="margin-top:12px;">
+        <input id="authCodeInput" maxlength="8" placeholder="8 haneli kod" inputmode="numeric" style="margin-top:12px;">
         <button id="authVerifyBtn">Onayla ve Gir</button>
         <div id="authResendBtn" style="margin-top:14px;color:var(--ink-soft);font-weight:700;font-size:13px;cursor:pointer;">Kodu tekrar gönder</div>
       </div>
       <div id="authError" style="color:#e85c50;font-size:12.5px;font-weight:700;margin-top:10px;display:none;"></div>
+      
+      <!-- REKLAM ALANI -->
+      <div id="authAdContainer" style="margin-top: 20px; display: flex; justify-content: center; min-height: 250px;"></div>
     </div>
   `;
 }
@@ -41,6 +44,28 @@ function showAuthScreen(onAuthenticated) {
   const screen = document.getElementById('startScreen');
   screen.innerHTML = authScreenMarkup();
   screen.style.display = 'flex';
+
+  // --- REKLAM YÜKLEME KODU BAŞLANGICI ---
+  const adContainer = document.getElementById('authAdContainer');
+  
+  // 1. Reklam ayarları (atOptions)
+  const adOptionsScript = document.createElement('script');
+  adOptionsScript.innerHTML = `
+    atOptions = {
+      'key' : 'bc8a35bb9db7bd9bee172ff39c8f2b1e',
+      'format' : 'iframe',
+      'height' : 250,
+      'width' : 300,
+      'params' : {}
+    };
+  `;
+  adContainer.appendChild(adOptionsScript);
+
+  // 2. Reklam sağlayıcıyı çağırma (invoke.js)
+  const invokeScript = document.createElement('script');
+  invokeScript.src = 'https://www.highperformanceformat.com/bc8a35bb9db7bd9bee172ff39c8f2b1e/invoke.js';
+  adContainer.appendChild(invokeScript);
+  // --- REKLAM YÜKLEME KODU BİTİŞİ ---
 
   const emailInput = document.getElementById('authEmailInput');
   const sendBtn = document.getElementById('authSendBtn');
@@ -74,7 +99,7 @@ function showAuthScreen(onAuthenticated) {
   async function verifyCode() {
     const email = emailInput.value.trim();
     const token = codeInput.value.trim();
-    if (token.length < 6) { showError('6 haneli kodu tam gir.'); return; }
+    if (token.length < 8) { showError('8 haneli kodu tam gir.'); return; }
     errorEl.style.display = 'none';
     verifyBtn.disabled = true;
     verifyBtn.textContent = 'Kontrol ediliyor...';
@@ -109,3 +134,4 @@ async function initAuth(onReady) {
     showAuthScreen(onReady);
   }
 }
+   
